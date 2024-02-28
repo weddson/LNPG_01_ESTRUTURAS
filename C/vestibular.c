@@ -32,7 +32,7 @@ struct no{
 
 struct estudante{
     char nome[20];
-    int q1, q2, q3, q4, q5, q6, q7, q8, q9, q10;
+    int q[10];
     int nota;
     struct estudante *prox;
 };
@@ -115,20 +115,20 @@ void novoEstudante(dadosEstudante *l){ // Inserir nó na lista
     printf("Digite a entrada(Nome do participante seguido pelas notas separado por espaco ou * para finalizar a inclusao de dados):\n");
     scanf("%s %i %i %i %i %i %i %i %i %i %i", &temp, &q1, &q2, &q3, &q4, &q5, &q6, &q7, &q8, &q9, &q10);
 
-    if (temp == '*'){
+    if (temp[1] == '*'){
         if (aux == NULL){ // Sem valores
             novoEst = malloc(sizeof(Estudante));
             strcpy(novoEst->nome, temp);
-            novoEst -> q1 = q1;
-            novoEst -> q2 = q2;
-            novoEst -> q3 = q3;
-            novoEst -> q4 = q3;
-            novoEst -> q5 = q5;
-            novoEst -> q6 = q6;
-            novoEst -> q7 = q7;
-            novoEst -> q8 = q8;
-            novoEst -> q9 = q9;
-            novoEst -> q10 = q10;
+            novoEst -> q[1] = q1;
+            novoEst -> q[2] = q2;
+            novoEst -> q[3] = q3;
+            novoEst -> q[4] = q3;
+            novoEst -> q[5] = q5;
+            novoEst -> q[6] = q6;
+            novoEst -> q[7] = q7;
+            novoEst -> q[8] = q8;
+            novoEst -> q[9] = q9;
+            novoEst -> q[10] = q10;
             novoEst -> prox = NULL;
             l->comeco = novoEst;
         } else { // Com valores
@@ -137,16 +137,16 @@ void novoEstudante(dadosEstudante *l){ // Inserir nó na lista
             }
             novoEst = malloc(sizeof(No));
             strcpy(novoEst->nome, temp);
-            novoEst -> q1 = q1;
-            novoEst -> q2 = q2;
-            novoEst -> q3 = q3;
-            novoEst -> q4 = q4;
-            novoEst -> q5 = q5;
-            novoEst -> q6 = q6;
-            novoEst -> q7 = q7;
-            novoEst -> q8 = q8;
-            novoEst -> q9 = q9;
-            novoEst -> q10 = q10;
+            novoEst -> q[1] = q1;
+            novoEst -> q[2] = q2;
+            novoEst -> q[3] = q3;
+            novoEst -> q[4] = q4;
+            novoEst -> q[5] = q5;
+            novoEst -> q[6] = q6;
+            novoEst -> q[7] = q7;
+            novoEst -> q[8] = q8;
+            novoEst -> q[9] = q9;
+            novoEst -> q[10] = q10;
             novoEst -> prox = NULL;
             aux->prox = novoEst;
         }
@@ -162,7 +162,7 @@ void imprimirEstudantes(dadosEstudante *l){ // Função para imprimir a lista
         printf("Lista vazia\n");
     }else{
         while(aux != NULL){
-            printf("%s %d %d %d %d %d %d %d %d %d %d %d\n", aux->nome, aux->q1, aux->q2, aux->q3, aux->q4, aux->q5, aux->q6, aux->q7, aux->q8, aux->q9, aux->q10, aux->nota);
+            printf("%s %d %d %d %d %d %d %d %d %d %d %d\n", aux->nome, aux->q[1], aux->q[2], aux->q[3], aux->q[4], aux->q[5], aux->q[6], aux->q[7], aux->q[8], aux->q[9], aux->q[10], aux->nota);
 
             aux = aux->prox;
         }
@@ -172,14 +172,21 @@ void imprimirEstudantes(dadosEstudante *l){ // Função para imprimir a lista
 void calcularNota(dadosEstudante *l){
     Estudante *aux;
     aux = l->comeco;
-    int nota;
+    int nota = 0;
+    int r[10];
 
     if (aux == NULL){
         printf("Lista vazia\n");
     }else{
         while(aux != NULL){
-            aux->q1 == r1
-            aux->nota = aux->q1 + aux->q2 + aux->q3 + aux->q4 + aux->q5 + aux->q6 + aux->q7 + aux->q8 + aux->q9 + aux->q10;
+            for (int i = 1; i <= 10; i++){
+                if (aux->q[i] == r[i]){
+                    nota = nota + 1;
+                } else {
+                    nota = nota + 0;
+                }
+            }
+            aux->nota = nota;
             aux = aux->prox;
         }
     }
@@ -188,8 +195,7 @@ void calcularNota(dadosEstudante *l){
 int main(){
 
     char temp[20];
-    int r1, r2, r3, r4, r5, r6, r7, r8, r9, r10;
-    int q1, q2, q3, q4, q5, q6, q7, q8, q9, q10;
+    int r[10];
 
     No *no1, *no2;
     dadosEstudante l;
@@ -198,17 +204,17 @@ int main(){
 
     //-------------PRIMEIRO TESTE ---------------//
 
-    /*printf("Qual o gabarito da prova (10 valores separados por espaco): \n");
-    scanf("%i %i %i %i %i %i %i %i %i %i", &r1, &r2, &r3, &r4, &r5, &r6, &r7, &r8, &r9, &r10);
+    printf("Qual o gabarito da prova (10 valores separados por espaco): \n");
+    scanf("%i %i %i %i %i %i %i %i %i %i", &r[1], &r[2], &r[3], &r[4], &r[5], &r[6], &r[7], &r[8], &r[9], &r[10]);
     
-    printf("Gabarito: %i %i %i %i %i %i %i %i %i %i\n", r1, r2, r3, r4, r5, r6, r7, r8, r9, r10);
+    // printf("Gabarito: %i %i %i %i %i %i %i %i %i %i\n", r1, r2, r3, r4, r5, r6, r7, r8, r9, r10);
     
    // while (1) {
-        printf("Digite a entrada(Nome do participante seguido pelas notas separado por espaço):\n");
-        scanf("%s %i %i %i %i %i %i %i %i %i %i", &temp, &q1, &q2, &q3, &q4, &q5, &q6, &q7, &q8, &q9, &q10);
+        // printf("Digite a entrada(Nome do participante seguido pelas notas separado por espaço):\n");
+        // scanf("%s %i %i %i %i %i %i %i %i %i %i", &temp, &q1, &q2, &q3, &q4, &q5, &q6, &q7, &q8, &q9, &q10);
 
         
-        printf("%s %i %i %i %i %i %i %i %i %i %i", temp, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10);
+        // printf("%s %i %i %i %i %i %i %i %i %i %i", temp, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10);
         // if (temp != '*'){
 
         // } else {
@@ -216,7 +222,7 @@ int main(){
         //     printf("Fim do programa\n");
         // }
     //}
-    */ //-------------FIM PRIMEIRO TESTE ---------------//
+    //-------------FIM PRIMEIRO TESTE ---------------//
 
     
     novoEstudante(&l);
