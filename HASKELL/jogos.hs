@@ -15,3 +15,4 @@ main = do
   quantidadeJogos <- readLn
   let (salario, bonus) = calculateSalaryAndBonus quantidadeJogos
   printf "Venda total: %.2f\nValor do salario: %.2f\nValor do bonus: %.2f\n" valorTotal salario bonus
+
