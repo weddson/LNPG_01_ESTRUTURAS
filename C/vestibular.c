@@ -115,7 +115,7 @@ void novoEstudante(dadosEstudante *l){ // Inserir nó na lista
     printf("Digite a entrada(Nome do participante seguido pelas notas separado por espaco ou * para finalizar a inclusao de dados):\n");
     scanf("%s %i %i %i %i %i %i %i %i %i %i", &temp, &q1, &q2, &q3, &q4, &q5, &q6, &q7, &q8, &q9, &q10);
 
-    if (temp[1] == '*'){
+    if (temp[1] != '*'){
         if (aux == NULL){ // Sem valores
             novoEst = malloc(sizeof(Estudante));
             strcpy(novoEst->nome, temp);
@@ -162,42 +162,40 @@ void imprimirEstudantes(dadosEstudante *l){ // Função para imprimir a lista
         printf("Lista vazia\n");
     }else{
         while(aux != NULL){
-            printf("%s %d %d %d %d %d %d %d %d %d %d %d\n", aux->nome, aux->q[1], aux->q[2], aux->q[3], aux->q[4], aux->q[5], aux->q[6], aux->q[7], aux->q[8], aux->q[9], aux->q[10], aux->nota);
+            printf("%s %i %i %i %i %i %i %i %i %i %i %i %i\n", aux->nome, aux->q[1], aux->q[2], aux->q[3], aux->q[4], aux->q[5], aux->q[6], aux->q[7], aux->q[8], aux->q[9], aux->q[10], aux->nota);
 
             aux = aux->prox;
         }
     }
 }
 
-void calcularNota(dadosEstudante *l){
-    Estudante *aux;
-    aux = l->comeco;
-    int nota = 0;
-    int r[10];
+// void calcularNota(dadosEstudante *l){
+//     Estudante *aux;
+//     aux = l->comeco;
+//     int nota = 0;
 
-    if (aux == NULL){
-        printf("Lista vazia\n");
-    }else{
-        while(aux != NULL){
-            for (int i = 1; i <= 10; i++){
-                if (aux->q[i] == r[i]){
-                    nota = nota + 1;
-                } else {
-                    nota = nota + 0;
-                }
-            }
-            aux->nota = nota;
-            aux = aux->prox;
-        }
-    }
-}
+//     if (aux == NULL){
+//         printf("Lista vazia\n");
+//     }else{
+//         while(aux != NULL){
+//             for (int i = 1; i <= 10; i++){
+//                 if (aux->q[i] == r[i]){
+//                     nota = nota + 1;
+//                 } else {
+//                     nota = nota + 0;
+//                 }
+//             }
+//             aux->nota = nota;
+//             aux = aux->prox;
+//         }
+//     }
+// }
 
 int main(){
 
     char temp[20];
     int r[10];
 
-    No *no1, *no2;
     dadosEstudante l;
 
     // solicitar uma entrada com nome e 10 inteiros - Primeiro teste
@@ -223,7 +221,27 @@ int main(){
         // }
     //}
     //-------------FIM PRIMEIRO TESTE ---------------//
+    void calcularNota(dadosEstudante *l){
+        Estudante *aux;
+        aux = l->comeco;
+        int nota = 0;
 
+        if (aux == NULL){
+            printf("Lista vazia\n");
+        }else{
+            while(aux != NULL){
+                for (int i = 1; i <= 10; i++){
+                    if (aux->q[i] == r[i]){
+                        nota = nota + 1;
+                    } else {
+                        nota = nota + 0;
+                    }
+                }
+                aux->nota = nota;
+                aux = aux->prox;
+            }
+        }
+    }
     
     novoEstudante(&l);
     imprimirEstudantes(&l);
